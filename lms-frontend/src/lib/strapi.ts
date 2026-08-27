@@ -19,24 +19,23 @@ export async function fetchFromStrapi(endpoint: string, options: RequestInit = {
 }
 
 export async function enrollInCourse(courseDocumentId: string, userId: number, token: string) {
-  const response = await fetch(`${STRAPI_URL}/api/courses/${courseDocumentId}`, {
+  const response = await fetch(`${STRAPI_URL}/api/users/${userId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      data: {
-        student_enrolled: {
-          connect: [userId],
-        },
-      },
+      enrolled_courses: [courseDocumentId],
     }),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("Enrollment failed. Please check permissions.");
+    console.error("Strapi Response Error:", data);
+    throw new Error(data?.error?.message || "Enrollment failed.");
   }
 
-  return response.json();
+  return data;
 }
