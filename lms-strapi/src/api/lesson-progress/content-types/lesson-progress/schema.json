@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "completd": {
+    "completed": {
       "type": "boolean",
       "default": false
     },

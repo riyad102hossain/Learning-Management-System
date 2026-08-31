@@ -528,7 +528,7 @@ export interface ApiLessonProgressLessonProgress
     draftAndPublish: true;
   };
   attributes: {
-    completd: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    completed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
